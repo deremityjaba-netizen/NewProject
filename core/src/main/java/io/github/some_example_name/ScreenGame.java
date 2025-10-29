@@ -1,5 +1,6 @@
 package io.github.some_example_name;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -7,13 +8,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class ScreenGame implements Screen {
 
     MyGdxGame myGdxGame;
-    Texture birdTexture;
-    int birdX = 0;
-    int birdY = 0;
-    int birdSpeed = 5;
+    Bird bird;
     ScreenGame(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        birdTexture = new Texture("bird0.png");
+
+        bird = new Bird(0,0, 7, 250, 200);
     }
 
     @Override
@@ -23,14 +22,16 @@ public class ScreenGame implements Screen {
 
     @Override
     public void render(float delta) {
-        birdX += birdSpeed;
-        birdY += birdSpeed;
+        if (Gdx.input.justTouched()) {
+            bird.onClick();
+        }
+        bird.fly();
 
         ScreenUtils.clear(1, 0, 0, 1);
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
         myGdxGame.batch.begin();
-        myGdxGame.batch.draw(birdTexture, birdX, birdY);
+        bird.draw(myGdxGame.batch);
         myGdxGame.batch.end();
     }
 
@@ -56,6 +57,6 @@ public class ScreenGame implements Screen {
 
     @Override
     public void dispose() {
-        birdTexture.dispose();
+        bird.dispose();
     }
 }
