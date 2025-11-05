@@ -1,5 +1,7 @@
 package io.github.some_example_name;
 
+import static io.github.some_example_name.MyGdxGame.SCR_HEIGHT;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
@@ -26,6 +28,12 @@ public class Bird {
         this.height = height;
         this.speed = speed;
         frameCounter = 0;
+    }
+
+    public boolean isInField(){
+        if(y + height <= 0) return false;
+        if(y > SCR_HEIGHT) return false;
+        return true;
     }
 
     void onClick(){

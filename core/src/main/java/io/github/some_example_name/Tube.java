@@ -31,6 +31,15 @@ public class Tube {
         textureDownTube = new Texture("tubes/tube.png");
     }
 
+    public boolean isHit(Bird bird){
+        if(bird.y <= gapY - gapHeight / 2 && bird.x + bird.width >= x && bird.x <= x)
+            return true;
+        if(bird.y + bird.height >= gapY + gapHeight / 2 && bird.x + bird.width >= x && bird.x <=x)
+            return true;
+
+        return false;
+    }
+
     void draw(Batch batch){
         batch.draw(textureUpperTube, x, gapY + gapHeight / 2, width, height);
         batch.draw(textureDownTube, x, gapY - gapHeight / 2 - height, width, height);
