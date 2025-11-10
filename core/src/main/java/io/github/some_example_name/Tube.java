@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.Random;
 
 public class Tube {
+    boolean isPointReceived = false;
     int x, gapY;
     final int width = 200;
     final int height = 700;
@@ -40,6 +41,14 @@ public class Tube {
         return false;
     }
 
+    public boolean needAddPoint(Bird bird){
+
+        return bird.x > x + width && !isPointReceived;
+    }
+    public void setPointReceived(){
+        isPointReceived = true;
+    }
+
     void draw(Batch batch){
         batch.draw(textureUpperTube, x, gapY + gapHeight / 2, width, height);
         batch.draw(textureDownTube, x, gapY - gapHeight / 2 - height, width, height);
@@ -48,6 +57,8 @@ public class Tube {
     void move(){
         x -= speed;
         if (x < -width){
+
+            isPointReceived = false;
             x = SCR_WIDTH + distanceBetweenTubes;
             gapY = gapHeight / 2 + padding + r.nextInt(SCR_HEIGHT - 2 * (padding + gapHeight / 2));
         }
