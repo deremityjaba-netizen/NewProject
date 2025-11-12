@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package io.github.some_example_name.characters;
 
 import static io.github.some_example_name.MyGdxGame.SCR_HEIGHT;
 
@@ -36,7 +36,7 @@ public class Bird {
         return true;
     }
 
-    void onClick(){
+    public void onClick(){
         jump = true;
         jumpHeight = maxHeightOfJump + y;
     }
@@ -63,5 +63,9 @@ public class Bird {
         for (Texture texture : framesArray){
             texture.dispose();
         }
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

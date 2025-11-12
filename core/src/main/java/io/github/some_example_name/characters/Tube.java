@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package io.github.some_example_name.characters;
 
 import static io.github.some_example_name.MyGdxGame.SCR_HEIGHT;
 import static io.github.some_example_name.MyGdxGame.SCR_WIDTH;
@@ -49,12 +49,12 @@ public class Tube {
         isPointReceived = true;
     }
 
-    void draw(Batch batch){
+    public void draw(Batch batch){
         batch.draw(textureUpperTube, x, gapY + gapHeight / 2, width, height);
         batch.draw(textureDownTube, x, gapY - gapHeight / 2 - height, width, height);
     }
 
-    void move(){
+    public void move(){
         x -= speed;
         if (x < -width){
 
@@ -65,7 +65,7 @@ public class Tube {
 
     }
 
-    void dispose(){
+    public void dispose(){
         textureUpperTube.dispose();
         textureDownTube.dispose();
     }

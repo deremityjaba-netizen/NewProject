@@ -1,12 +1,17 @@
-package io.github.some_example_name;
+package io.github.some_example_name.screens;
 
 import static io.github.some_example_name.MyGdxGame.SCR_HEIGHT;
 import static io.github.some_example_name.MyGdxGame.SCR_WIDTH;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
+
+import io.github.some_example_name.MyGdxGame;
+import io.github.some_example_name.characters.Bird;
+import io.github.some_example_name.characters.Tube;
+import io.github.some_example_name.components.MovingBackground;
+import io.github.some_example_name.components.PointCounter;
 
 public class ScreenGame implements Screen {
 
@@ -16,18 +21,20 @@ public class ScreenGame implements Screen {
     Tube[] tubes;
     PointCounter pointCounter;
     MovingBackground movingBackground;
+
     final int pointCounterMarginTop = 60;
     final int getPointCounterMarginRight = 400;
     int tubeCount = 3;
     int gamePoints;
 
 
-    ScreenGame(MyGdxGame myGdxGame) {
+    public ScreenGame(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         initTubes();
         bird = new Bird(20,SCR_HEIGHT / 2, 7, 250, 200);
         pointCounter = new PointCounter(SCR_WIDTH - getPointCounterMarginRight, SCR_HEIGHT - pointCounterMarginTop);
-        movingBackground = new MovingBackground();
+        movingBackground = new MovingBackground("background/game_bg.png");
+
     }
 
 
@@ -36,6 +43,8 @@ public class ScreenGame implements Screen {
     public void show() {
         gamePoints = 0;
         isGameOver = false;
+        bird.setY(SCR_HEIGHT / 2);
+        initTubes();
     }
 
     @Override
@@ -62,8 +71,14 @@ public class ScreenGame implements Screen {
         if(!bird.isInField()){
             System.out.println("ВЕРНИТЕСЬ НА ПОЛЕ");
             isGameOver = true;
+
+
         }
 
+        if(isGameOver) {
+            myGdxGame.screenRestart.gamePoints = gamePoints;
+            myGdxGame.setScreen(myGdxGame.screenRestart);
+        }
 
         ScreenUtils.clear(1, 0, 0, 1);
         myGdxGame.camera.update();
