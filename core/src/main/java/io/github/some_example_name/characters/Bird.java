@@ -15,6 +15,7 @@ public class Bird {
     int frameCounter = 0;
 
     Texture[] framesArray = new Texture[]{
+        new Texture("birdTiles/bird1.png"),
         new Texture("birdTiles/bird0.png"),
             new Texture("birdTiles/bird1.png"),
             new Texture("birdTiles/bird2.png"),
@@ -47,6 +48,8 @@ public class Bird {
         }
 
         if (jump) {
+            if (frameCounter == framesArray.length * 5 - 1)
+            frameCounter = 0;
             y += speed;
         } else {
             y -= speed;
@@ -56,7 +59,10 @@ public class Bird {
     public void draw(Batch batch){
         int frameMultiplier = 5;
         batch.draw(framesArray[frameCounter / frameMultiplier], x, y, width, height);
-        if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
+        //if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
+        if(frameCounter < framesArray.length * frameMultiplier - 1){
+            frameCounter++;
+        }
     }
 
     public void dispose(){

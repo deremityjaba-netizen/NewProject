@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import io.github.some_example_name.screens.ScreenGame;
+import io.github.some_example_name.screens.ScreenMenu;
 import io.github.some_example_name.screens.ScreenRestart;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -16,6 +17,7 @@ public class MyGdxGame extends Game {
     public OrthographicCamera camera;
     public ScreenGame screenGame;
     public ScreenRestart screenRestart;
+    public ScreenMenu screenMenu;
 
 
     @Override
@@ -25,9 +27,10 @@ public class MyGdxGame extends Game {
 
         batch = new SpriteBatch();
 
+        screenMenu = new ScreenMenu(this);
         screenGame = new ScreenGame(this);
         screenRestart = new ScreenRestart(this);
-        setScreen(screenGame);
+        setScreen(screenMenu);
     }
 
 

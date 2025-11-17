@@ -9,17 +9,18 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import java.util.Random;
 
 public class Tube {
+    Random r = new Random();
+
     boolean isPointReceived = false;
     int x, gapY;
     final int width = 200;
     final int height = 700;
-    int padding = 100;
-    int gapHeight = 400;
+    int padding = 50;
+    int gapHeight = 290 + r.nextInt(300 );
     int distanceBetweenTubes;
     int speed = 5;
     Texture textureUpperTube;
     Texture textureDownTube;
-    Random r = new Random();
 
 
     public Tube(int tubeCount, int tubeIdx) {
